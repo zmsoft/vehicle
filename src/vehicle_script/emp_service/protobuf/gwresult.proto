@@ -1,0 +1,96 @@
+﻿syntax = "proto3";
+package protobuf;
+//小v请求的基本格式
+message GWResult {
+	enum ActionType {
+		DEFAULT = 0;
+		GW_INFO = 1;
+		THREAT = 2;
+		STRATEGY = 3;
+	}
+	ActionType action_type = 1;//推送数据类型
+	bytes param = 2;//请求参数
+	string GUID = 3;//小VGUID
+}
+
+message GwInfoParam {
+	message ModuleItem {
+		string name = 1;//模块名称
+		string version = 2;//模块版本号
+	}
+	enum Type {
+		DEFAULT = 0;
+		VSMART = 1;
+		VHALO = 2;
+		VWIFI = 3;
+		VENUSHALO = 4;
+	}
+	enum DeployMode {
+		DEPLOYMODEDEFAULT = 0;
+		ROUTEMODE = 1; //路由模式
+		SWITCHMODE = 2;//透传(交换)模式
+	}
+	string version = 1;//软件版本
+	uint32 start_time = 2;//启动时间
+	string firmware_version = 3;//固件版本
+	string hardware_model= 4;//硬件型号
+	repeated ModuleItem module = 5;//模块信息
+	string supply_id = 6;//渠道id
+	string up_router_ip = 7;//上级路由ip
+	string ip = 8;//盒子ip
+	Type type = 9;//盒子类型
+	string mac = 10;//盒子mac
+	uint32 timestamp = 11;//时间戳
+	DeployMode deploy_mode = 12; //网关部署模式
+}
+
+//威胁类型
+message ThreatParam{
+	//威胁事件object,
+	message Item{
+		enum Type {
+			DEFAULT = 0;
+			SITE = 1;//网内设备访问异常URL/IP(URL) content:url
+			IP = 2;//网内设备访问异常URL/IP（IP） 目标(异常)IP为: dst_ip, content:空
+			DNSHIJACK = 3;//DNS劫持 被劫持的域名(url) content:url, dst_ip:劫持后的目标IP
+			UDEVICEWHITEIP = 4;//非法设备访问(IP)白名单 目标IP为: dst_ip, content:空
+			UDEVICEWHITESITE = 5;//非法设备访问(URL)白名单 content:url
+			UDEVICEBLACKIP = 6; //非法设备访问异常URL/IP(IP) 目标(异常)IP为: dst_ip content:空
+			UDEVICEBLACKSITE = 7;//非法设备访问异常URL/IP(URL) content:url
+			LANINTRUSION = 8;//网内设备非法访问内网 入侵目标IP为: dst_ip, content:目标设备mac地址
+			UDEVLANINTRUSION = 9; //非法设备访问内网 入侵目标IP为: dst_ip, content:目标设备mac地址
+		}
+		enum Status {
+			UNKNOWN = 0;
+			FOUND = 1;//新发现
+			PREVENT = 2;//已阻止(告警并拦截)
+			WARNING = 3;//已(仅)警告
+		}
+		string src_mac = 1;//发起网络请求的设备mac
+		Type threat_type = 2;//威胁类型
+		string content = 3;//威胁内容，根据类型传, 包括:url/mac
+		Status threat_status = 4;//威胁处理状态
+		uint32 attact_time = 5;//威胁发现时间
+		string src_ip = 6;//源ip
+		string dst_ip = 7;//目标ip
+	}
+	repeated Item threat_item = 1;//威胁项
+}
+
+// 小V 当前策略的状态
+message StrategyParam {
+	enum Type {
+		TYPEDEFAULT = 0;
+		WHITEMODE =1;//白名单模式
+		BLACKMODE =2;//黑名单模式
+	}
+	enum HandleMode {
+		MODEDEFAULT = 0;
+		PREVENTWARNING = 1;//阻断并告警
+		WARNING = 2;//警告
+	}
+	string strategy_id = 1;//策略id
+	HandleMode handle_mode = 2;//处理方式
+	Type defense_type = 3;//策略模式
+	bool enable = 4;//策略是否启用
+}
