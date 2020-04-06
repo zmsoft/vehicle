@@ -6,6 +6,9 @@ gin、goredis、gorm、restfulapi、protobuf、emq、jwt、gomod
 项目的总体构建流程如下:
 ![image](https://github.com/iyongfei/vehicle/blob/master/assets/outer_line.png)
 
+
+```
+
 .
 ├── README.md
 ├── assets
@@ -124,3 +127,5 @@ gin、goredis、gorm、restfulapi、protobuf、emq、jwt、gomod
 │           ├── conf_util.go
 │           ├── http_util.go
 │           └── string_util.go
+
+```
