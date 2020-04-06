@@ -6,97 +6,65 @@ gin、goredis、gorm、restfulapi、protobuf、emq、jwt、gomod
 项目的总体构建流程如下:
 ![image](https://github.com/iyongfei/vehicle/blob/master/assets/outer_line.png)
 
+仓促完成，后续在更新
 
 ```
-
 .
 ├── README.md
-├── assets
-│   ├── outer_line.png
+├── assets    存放sql文件
+│   ├── outer_line.png
 │   └── vehicle.sql
-├── conf.ini
-├── conf.txt
-├── go.mod
+├── conf.ini  项目的配置文件
+├── conf.txt  测试脚本服务的配置文件
+├── go.mod   mod配置文件
 ├── go.sum
 ├── src
-│   ├── vehicle
-│   │   ├── api_server
-│   │   │   ├── auth.go
+│   ├── vehicle  项目服务目录
+│   │   ├── api_server  API包
+│   │   │   ├── auth.go
 │   │   │   ├── threat.go
 │   │   │   ├── vehicle.go
 │   │   │   └── white_list.go
-│   │   ├── conf
-│   │   │   ├── conf.go
+│   │   ├── conf  ini库读取配置
+│   │   │   ├── conf.go
 │   │   │   └── conf_util.go
-│   │   ├── db
-│   │   │   ├── db.go
-│   │   │   ├── mysql
-│   │   │   │   ├── add.go
-│   │   │   │   ├── dele.go
-│   │   │   │   ├── gorm.go
-│   │   │   │   ├── query.go
-│   │   │   │   └── update.go
-│   │   │   └── redis
-│   │   │       ├── redis_db.go
-│   │   │       └── redis_util.go
-│   │   ├── emq
-│   │   │   ├── emq.go
-│   │   │   ├── emq_client
-│   │   │   │   ├── conn_lost_handler.go
-│   │   │   │   ├── emq_client.go
-│   │   │   │   └── tls_config.go
-│   │   │   ├── emq_cmd
-│   │   │   │   ├── emq_cmd_impl.go
-│   │   │   │   └── vehicle_cmd.go
-│   │   │   ├── protobuf
-│   │   │   │   ├── gwresult.pb.go
-│   │   │   │   ├── gwresult.proto
-│   │   │   │   ├── protobuf.txt
-│   │   │   │   ├── scommand.pb.go
-│   │   │   │   └── scommand.proto
-│   │   │   ├── topic_publish_handler
-│   │   │   │   ├── publish_msg.go
-│   │   │   │   └── publish_service.go
-│   │   │   ├── topic_router
-│   │   │   │   ├── topic_router.go
-│   │   │   │   ├── topic_router_data.go
-│   │   │   │   └── topic_router_data_pool.go
-│   │   │   └── topic_subscribe_handler
-│   │   │       ├── action_handler_dispatch.go
-│   │   │       ├── vehicle_info_handle.go
-│   │   │       ├── vehicle_online.go
-│   │   │       ├── vehicle_strategy_handle.go
-│   │   │       └── vehicle_threat_handle.go
-│   │   ├── logger
-│   │   │   ├── log_util.go
+│   │   ├── db   数据库包
+│   │   │   ├── db.go
+│   │   │   ├── mysql  gorm封装包
+│   │   │   └── redis  gredis封装包
+│   │   ├── emq   emq包
+│   │   │   ├── emq.go
+│   │   │   ├── emq_client emq服务初始化
+│   │   │   ├── emq_cmd 发布emq消息封装体
+│   │   │   ├── protobuf protobuf文件目录
+│   │   │   ├── topic_publish_handler 发布emq消息
+│   │   │   ├── topic_router emq router分发
+│   │   │   └── topic_subscribe_handler 接收emq消息
+│   │   ├── logger logger日志目录
+│   │   │   ├── log_util.go
 │   │   │   ├── logger.go
 │   │   │   └── vlogger.go
-│   │   ├── main.go
-│   │   ├── middleware
-│   │   │   ├── auth_middle.go
+│   │   ├── main.go 服务入口
+│   │   ├── middleware 中间件jwt检测token，跨域
+│   │   │   ├── auth_middle.go
 │   │   │   └── cors
-│   │   │       ├── cors.go
-│   │   │       ├── cors_conf.go
-│   │   │       └── cors_util.go
 │   │   ├── model
-│   │   │   ├── model_base
-│   │   │   │   └── model_base.go
-│   │   │   ├── threat.go
+│   │   │   ├── model_base model接口
+│   │   │   ├── threat.go 
 │   │   │   ├── user.go
 │   │   │   ├── vehicle_info.go
 │   │   │   └── white_list.go
-│   │   ├── response
-│   │   │   ├── response.go
+│   │   ├── response  response包
+│   │   │   ├── response.go
 │   │   │   ├── response_code.go
 │   │   │   └── response_msg.go
-│   │   ├── router
-│   │   │   ├── router.go
+│   │   ├── router 路由
+│   │   │   ├── router.go
 │   │   │   └── v1
-│   │   │       └── v1.go
 │   │   ├── service
-│   │   │   └── jwt_service.go
-│   │   └── util
-│   │       ├── composite_data_utils.go
+│   │   │   └── jwt_service.go jwt权限
+│   │   └── util 工具类
+│   │       ├── composite_data_utils.go
 │   │       ├── compress_util.go
 │   │       ├── data_type_util.go
 │   │       ├── encryption_util.go
@@ -107,24 +75,19 @@ gin、goredis、gorm、restfulapi、protobuf、emq、jwt、gomod
 │   │       ├── string_util.go
 │   │       ├── time_util.go
 │   │       └── vjson.go
-│   └── vehicle_script
-│       ├── api_script
-│       │   ├── auth_api.go
+│   └── vehicle_script  项目脚本服务目录
+│       ├── api_script  api的脚本
+│       │   ├── auth_api.go
 │       │   └── regist_api.go
-│       ├── emp_service
-│       │   ├── emq_service.go
+│       ├── emp_service emq服务
+│       │   ├── emq_service.go
 │       │   ├── emq_tls_conf.go
 │       │   └── protobuf
-│       │       ├── gwresult.pb.go
-│       │       ├── gwresult.proto
-│       │       ├── protobuf.txt
-│       │       ├── scommand.pb.go
-│       │       └── scommand.proto
-│       ├── emq_script
+│       ├── emq_script emq服务脚本
 │       │   ├── push_vehicle_info.go
 │       │   └── push_vehicle_threat.go
-│       └── tool
-│           ├── conf_util.go
+│       └── tool 工具类
+│           ├── conf_util.go
 │           ├── http_util.go
 │           └── string_util.go
 
