@@ -9,22 +9,102 @@ gin、goredis、gorm、restfulapi、protobuf、emq、jwt、gomod
 仓促完成，后续在更新
 
 ```
+
 .
 ├── README.md
-├── assets    存放sql文件
-│   ├── outer_line.png
-│   └── vehicle.sql
+├── assets.   存放sql文件
+│   ├── gomod
+│   ├── outer_line.png
+│   └── vehicle.sql 数据库sql文件
 ├── conf.ini  项目的配置文件
 ├── conf.txt  测试脚本服务的配置文件
-├── go.mod   mod配置文件
+├── go.mod    mod配置文件
 ├── go.sum
 ├── src
-│   ├── vehicle  项目服务目录
-│   │   ├── api_server  API包
-│   │   │   ├── auth.go
+│   ├── vehicle  项目服务目录
+│   │   ├── api_server  API包
+│   │   │   ├── auth.go 
 │   │   │   ├── threat.go
 │   │   │   ├── vehicle.go
 │   │   │   └── white_list.go
+│   │   ├── conf   ini库读取配置
+│   │   │   ├── conf.go
+│   │   │   └── conf_util.go
+│   │   ├── cron   定时任务包
+│   │   │   ├── cron.go
+│   │   │   └── cron_func.go
+│   │   ├── db     存储
+│   │   │   ├── db.go
+│   │   │   ├── mysql 
+│   │   │   └── redis
+│   │   ├── docs
+│   │   │   ├── docs.go
+│   │   │   ├── swagger.json
+│   │   │   └── swagger.yaml
+│   │   ├── emq
+│   │   │   ├── emq.go
+│   │   │   ├── emq_client
+│   │   │   ├── emq_cmd
+│   │   │   ├── protobuf
+│   │   │   ├── topic_publish_handler
+│   │   │   ├── topic_router
+│   │   │   └── topic_subscribe_handler
+│   │   ├── logger
+│   │   │   ├── log_util.go
+│   │   │   ├── logger.go
+│   │   │   └── vlogger.go
+│   │   ├── main.go
+│   │   ├── middleware
+│   │   │   ├── auth_middle.go
+│   │   │   └── cors
+│   │   ├── model
+│   │   │   ├── model_base
+│   │   │   ├── threat.go
+│   │   │   ├── user.go
+│   │   │   ├── vehicle_info.go
+│   │   │   └── white_list.go
+│   │   ├── response
+│   │   │   ├── response.go
+│   │   │   ├── response_code.go
+│   │   │   └── response_msg.go
+│   │   ├── router
+│   │   │   ├── router.go
+│   │   │   └── v1
+│   │   ├── service
+│   │   │   └── jwt_service.go
+│   │   ├── timing
+│   │   │   ├── license_timer.go
+│   │   │   ├── timing.go
+│   │   │   └── timing_pkg
+│   │   └── util
+│   │       ├── composite_data_utils.go
+│   │       ├── compress_util.go
+│   │       ├── data_type_util.go
+│   │       ├── encryption_util.go
+│   │       ├── file_util.go
+│   │       ├── http_client.go
+│   │       ├── ip_util.go
+│   │       ├── log_util.go
+│   │       ├── string_util.go
+│   │       ├── time_util.go
+│   │       └── vjson.go
+│   └── vehicle_script
+│       ├── api_script
+│       │   ├── auth_api.go
+│       │   └── regist_api.go
+│       ├── emp_service
+│       │   ├── emq_service.go
+│       │   ├── emq_tls_conf.go
+│       │   └── protobuf
+│       ├── emq_script
+│       │   ├── push_vehicle_info.go
+│       │   └── push_vehicle_threat.go
+│       └── tool
+│           ├── conf_util.go
+│           ├── http_util.go
+│           └── string_util.go
+
+
 │   │   ├── conf  ini库读取配置
 │   │   │   ├── conf.go
 │   │   │   └── conf_util.go
