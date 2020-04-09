@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/golang/protobuf/proto"
 	"strconv"
-	"vehicle_system/src/vehicle_script/emp_service"
-	"vehicle_system/src/vehicle_script/emp_service/protobuf"
+	"vehicle_system/src/vehicle_script/emq_service"
+	"vehicle_system/src/vehicle_script/emq_service/protobuf"
 	"vehicle_system/src/vehicle_script/tool"
 )
 
@@ -24,7 +24,7 @@ func main()  {
 	defaultVehicleCount ,_ := strconv.Atoi(insertVehicleCount)
 	fmt.Println("defaultVehicleCount:",defaultVehicleCount)
 
-	emqx:=emp_service.NewEmqx()
+	emqx:= emq_service.NewEmqx()
 	for i:=0;i< defaultVehicleCount;i++{
 		vid:=tool.RandomString(32)
 		//vid:="dgzeKAoBGbl5E5ajqOq1phksMCVz8S7C"

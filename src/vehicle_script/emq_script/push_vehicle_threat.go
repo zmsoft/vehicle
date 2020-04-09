@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/golang/protobuf/proto"
 	"strconv"
-	"vehicle_system/src/vehicle_script/emp_service"
-	"vehicle_system/src/vehicle_script/emp_service/protobuf"
+	"vehicle_system/src/vehicle_script/emq_service"
+	"vehicle_system/src/vehicle_script/emq_service/protobuf"
 	"vehicle_system/src/vehicle_script/tool"
 )
 
@@ -25,7 +25,7 @@ func main()  {
 	defaultVehicleThreatCount ,_ := strconv.Atoi(insertVehicleThreatCount)
 	fmt.Println("defaultVehicleCount:",defaultVehicleThreatCount)
 
-	emqx:=emp_service.NewEmqx()
+	emqx:= emq_service.NewEmqx()
 	emqx.Publish(insertVehicleId,creatThreatProtobuf(insertVehicleId,defaultVehicleThreatCount))
 }
 
