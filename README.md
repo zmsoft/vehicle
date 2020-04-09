@@ -3,7 +3,7 @@
 仓促完成，后续在更新！！！
 
 用到的技术
-gin、goredis、gorm、restfulapi、protobuf、emq、jwt、gomod
+gin、goredis、gorm、restfulapi、protobuf、emq、jwt、gomod、cron、swagger
 
 项目的总体构建流程如下:
 ![image](https://github.com/iyongfei/vehicle/blob/master/assets/outer_line.png)
